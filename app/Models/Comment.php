@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
+{
+    protected $fillable = [
+        'user_id', 'comic_id', 'chapter_id', 'parent_id',
+        'content', 'is_spoiler', 'likes_count', 'is_approved'
+    ];
+
+    protected $casts = [
+        'is_spoiler' => 'boolean',
+        'is_approved' => 'boolean',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comic()
+    {
+        return $this->belongsTo(Comic::class);
+    }
+
+    public function chapter()
+    {
+        return $this->belongsTo(Chapter::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+}
