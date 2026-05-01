@@ -56,5 +56,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('genres', \App\Http\Controllers\Admin\GenreController::class);
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
         Route::get('settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::put('settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     });
 });

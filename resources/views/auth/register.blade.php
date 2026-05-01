@@ -15,7 +15,7 @@
             <p class="text-sm text-gray-500 mt-1">Bergabung dengan komunitas MangaCuy</p>
         </div>
 
-        <form method="POST" action="{{ route('register') }}" class="bg-dark-900/50 border border-dark-800 rounded-2xl p-8 space-y-5">
+        <form method="POST" action="{{ route('register') }}" class="card p-8 space-y-5">
             @csrf
 
             @if($errors->any())
@@ -29,41 +29,41 @@
             @endif
 
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-1.5">Nama Lengkap</label>
+                <label class="form-label text-gray-400">Nama Lengkap</label>
                 <input type="text" name="name" value="{{ old('name') }}" required
-                       class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 focus:outline-none transition placeholder-gray-600"
+                       class="input bg-white/5"
                        placeholder="John Doe">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-1.5">Username</label>
+                <label class="form-label text-gray-400">Username</label>
                 <input type="text" name="username" value="{{ old('username') }}" required
-                       class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 focus:outline-none transition placeholder-gray-600"
+                       class="input bg-white/5"
                        placeholder="johndoe">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-1.5">Email</label>
+                <label class="form-label text-gray-400">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}" required
-                       class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 focus:outline-none transition placeholder-gray-600"
+                       class="input bg-white/5"
                        placeholder="email@example.com">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-1.5">Password</label>
+                <label class="form-label text-gray-400">Password</label>
                 <input type="password" name="password" required
-                       class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 focus:outline-none transition placeholder-gray-600"
+                       class="input bg-white/5"
                        placeholder="Minimal 6 karakter">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-1.5">Konfirmasi Password</label>
+                <label class="form-label text-gray-400">Konfirmasi Password</label>
                 <input type="password" name="password_confirmation" required
-                       class="w-full bg-dark-800 border border-dark-700 rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 focus:outline-none transition placeholder-gray-600"
+                       class="input bg-white/5"
                        placeholder="Ulangi password">
             </div>
 
-            <button type="submit" class="w-full py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl transition-all hover:shadow-lg hover:shadow-primary-600/30">
+            <button type="submit" class="w-full btn btn-lg btn-primary">
                 Daftar
             </button>
 

@@ -59,7 +59,7 @@ class ChapterController extends Controller
                     ChapterImage::create([
                         'chapter_id' => $chapter->id,
                         'image_path' => $path,
-                        'order_column' => $index + 1,
+                        'sort_order' => $index + 1,
                     ]);
                 }
             }
@@ -89,15 +89,51 @@ class ChapterController extends Controller
             'comic_id' => 'required|exists:comics,id',
             'chapter_number' => 'required|numeric',
             'title' => 'nullable|string|max:255',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
-        $chapter->update([
-            'comic_id' => $request->comic_id,
-            'chapter_number' => $request->chapter_number,
-            'title' => $request->title,
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return redirect()->route('admin.chapters.index')->with('success', 'Data chapter diperbarui.');
+            $chapter->update([
+                'comic_id' => $request->comic_id,
+                'chapter_number' => $request->chapter_number,
+                'title' => $request->title,
+            ]);
+
+            // Jika ada gambar baru yang diunggah
+            if ($request->hasFile('images')) {
+                // Hapus gambar lama dari storage & database
+                foreach ($chapter->images as $oldImage) {
+                    if ($oldImage->image_path) {
+                        Storage::disk('public')->delete($oldImage->image_path);
+                    }
+                    $oldImage->delete();
+                }
+
+                // Simpan gambar baru
+                $comicTitleSlug = Str::slug($chapter->comic->title);
+                $chapCount = $request->chapter_number;
+
+                foreach ($request->file('images') as $index => $image) {
+                    $path = $image->store("chapters/{$comicTitleSlug}/ch-{$chapCount}", 'public');
+                    
+                    ChapterImage::create([
+                        'chapter_id' => $chapter->id,
+                        'image_path' => $path,
+                        'sort_order' => $index + 1,
+                    ]);
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('admin.chapters.index')->with('success', 'Data chapter diperbarui.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Chapter $chapter)

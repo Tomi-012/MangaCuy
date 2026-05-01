@@ -3,15 +3,15 @@
 @section('title', 'Genre: ' . $genre->name . ' - ' . config('app.name'))
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="page-container page-section">
     <div class="mb-8">
         <div class="flex items-center gap-3 mb-2">
             <a href="{{ route('genres.index') }}" class="text-sm text-gray-500 hover:text-primary-400">Genre</a>
             <span class="text-gray-700">/</span>
-            <span class="text-sm text-primary-400 font-medium">{{ $genre->name }}</span>
+            <span class="text-sm text-primary-400 font-semibold">{{ $genre->name }}</span>
         </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold flex items-center gap-3">
-            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+        <h1 class="section-title flex items-center gap-3">
+            <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
             {{ $genre->name }}
         </h1>
         @if($genre->description)
@@ -20,7 +20,7 @@
     </div>
 
     @if($comics->count() > 0)
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-5">
+    <div class="comic-grid stagger-grid">
         @foreach($comics as $comic)
             @include('partials.comic.card', ['comic' => $comic])
         @endforeach

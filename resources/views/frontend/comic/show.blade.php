@@ -15,7 +15,7 @@
 </div>
 
 <!-- Comic Detail -->
-<div class="container mx-auto px-4 -mt-32 relative z-10">
+<div class="page-container -mt-32 relative z-10">
     <div class="flex flex-col md:flex-row gap-6 md:gap-8">
         <!-- Cover Image -->
         <div class="flex-shrink-0 mx-auto md:mx-0">
@@ -34,7 +34,7 @@
                 </span>
             </div>
 
-            <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight mb-1">{{ $comic->title }}</h1>
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-black leading-tight mb-1">{{ $comic->title }}</h1>
             @if($comic->alternative_title)
             <p class="text-sm text-gray-500 mb-4">{{ $comic->alternative_title }}</p>
             @endif
@@ -58,19 +58,19 @@
             <!-- Meta Info -->
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 text-sm">
                 @if($comic->author)
-                <div class="bg-dark-800/50 rounded-xl p-3 border border-dark-700/50">
+                <div class="bg-dark-900/50 rounded-2xl p-3 border border-white/5">
                     <span class="text-gray-500 text-xs block">Author</span>
                     <span class="font-semibold">{{ $comic->author }}</span>
                 </div>
                 @endif
                 @if($comic->artist)
-                <div class="bg-dark-800/50 rounded-xl p-3 border border-dark-700/50">
+                <div class="bg-dark-900/50 rounded-2xl p-3 border border-white/5">
                     <span class="text-gray-500 text-xs block">Artist</span>
                     <span class="font-semibold">{{ $comic->artist }}</span>
                 </div>
                 @endif
                 @if($comic->released_year)
-                <div class="bg-dark-800/50 rounded-xl p-3 border border-dark-700/50">
+                <div class="bg-dark-900/50 rounded-2xl p-3 border border-white/5">
                     <span class="text-gray-500 text-xs block">Released</span>
                     <span class="font-semibold">{{ $comic->released_year }}</span>
                 </div>
@@ -81,7 +81,7 @@
             <div class="flex flex-wrap gap-2 mb-5">
                 @foreach($comic->genres as $genre)
                 <a href="{{ route('genre.show', $genre->slug) }}"
-                   class="px-3 py-1.5 bg-dark-800/50 border border-dark-700/50 rounded-lg text-xs font-medium hover:bg-primary-600/20 hover:border-primary-500/40 hover:text-primary-400 transition">
+                   class="chip bg-white/5 hover:bg-primary-600/20 hover:border-primary-500/40 hover:text-primary-400 transition">
                     {{ $genre->name }}
                 </a>
                 @endforeach
@@ -91,7 +91,7 @@
             <div class="flex flex-wrap gap-3">
                 @if($firstChapter)
                 <a href="{{ route('chapter.read', [$comic->slug, $firstChapter->slug]) }}"
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl transition-all hover:shadow-lg hover:shadow-primary-600/30">
+                   class="btn btn-lg btn-primary">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                     Baca Ch. 1
                 </a>
@@ -99,14 +99,14 @@
 
                 @if($lastChapter && $lastChapter->id !== ($firstChapter->id ?? null))
                 <a href="{{ route('chapter.read', [$comic->slug, $lastChapter->slug]) }}"
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-dark-800 hover:bg-dark-700 text-white font-bold rounded-xl border border-dark-700 transition-all">
+                   class="btn btn-lg btn-outline bg-white/5 text-white">
                     Chapter Terbaru
                 </a>
                 @endif
 
                 @auth
                 <button onclick="toggleBookmark({{ $comic->id }}, this)"
-                        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border transition-all font-bold text-sm {{ $isBookmarked ? 'bg-primary-600 border-primary-600 text-white' : 'bg-dark-800 border-dark-700 hover:bg-dark-700 text-gray-300' }}">
+                        class="btn btn-lg {{ $isBookmarked ? 'btn-primary' : 'btn-outline bg-white/5 text-gray-200' }}">
                     @if($isBookmarked)
                     <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H15a3 3 0 110 6h-1v5a1 1 0 11-2 0v-5H8v5a1 1 0 11-2 0v-5H5a3 3 0 110-6h.17A3 3 0 015 5zm3.5 0a1.5 1.5 0 013 0v1h-3V5z" clip-rule="evenodd"/></svg> Bookmarked
                     @else
@@ -121,7 +121,7 @@
     <!-- Synopsis -->
     <div class="mt-8" x-data="{ expanded: false }">
         <h2 class="text-lg font-bold mb-3">Sinopsis</h2>
-        <div class="bg-dark-900/50 border border-dark-800 rounded-xl p-5">
+        <div class="bg-dark-900/50 border border-white/5 rounded-2xl p-5">
             <p class="text-sm text-gray-400 leading-relaxed" :class="{ 'line-clamp-3': !expanded }">
                 {{ $comic->synopsis ?? 'Belum ada sinopsis.' }}
             </p>
@@ -141,17 +141,17 @@
                 <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg> Daftar Chapter ({{ $comic->chapters->count() }})
             </h2>
             <div class="flex items-center gap-2">
-                <button @click="sort = 'desc'" :class="sort === 'desc' ? 'bg-primary-600 text-white' : 'bg-dark-800 text-gray-400'"
-                        class="px-3 py-1.5 text-xs font-bold rounded-lg transition">Terbaru</button>
-                <button @click="sort = 'asc'" :class="sort === 'asc' ? 'bg-primary-600 text-white' : 'bg-dark-800 text-gray-400'"
-                        class="px-3 py-1.5 text-xs font-bold rounded-lg transition">Terlama</button>
+                <button @click="sort = 'desc'" :class="sort === 'desc' ? 'btn-primary' : 'btn-outline bg-white/5 text-gray-300'"
+                        class="btn btn-sm">Terbaru</button>
+                <button @click="sort = 'asc'" :class="sort === 'asc' ? 'btn-primary' : 'btn-outline bg-white/5 text-gray-300'"
+                        class="btn btn-sm">Terlama</button>
             </div>
         </div>
 
-        <div class="bg-dark-900/50 border border-dark-800 rounded-xl overflow-hidden max-h-[500px] overflow-y-auto">
+        <div class="bg-dark-900/50 border border-white/5 rounded-2xl overflow-hidden max-h-[500px] overflow-y-auto">
             @forelse($comic->chapters as $chapter)
             <a href="{{ route('chapter.read', [$comic->slug, $chapter->slug]) }}"
-               class="flex items-center justify-between px-5 py-3.5 hover:bg-dark-800/70 transition border-b border-dark-800/50 group"
+               class="flex items-center justify-between px-5 py-3.5 hover:bg-white/5 transition border-b border-white/5 group"
                :style="sort === 'asc' ? 'order: {{ $comic->chapters->count() - $loop->index }}' : ''">
                 <div class="flex items-center gap-3">
                     <span class="font-bold text-sm group-hover:text-primary-400 transition">Chapter {{ (int)$chapter->chapter_number }}</span>
@@ -159,11 +159,11 @@
                     <span class="text-sm text-gray-500 hidden md:inline">- {{ Str::limit($chapter->title, 40) }}</span>
                     @endif
                     @if($chapter->published_at && $chapter->published_at->diffInHours(now()) < 48)
-                    <span class="px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded-md badge-new">NEW</span>
-                    @endif
-                </div>
-                <span class="text-xs text-gray-600 flex-shrink-0 ml-4">{{ $chapter->published_at ? $chapter->published_at->diffForHumans() : '' }}</span>
-            </a>
+                    <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-md badge-new">NEW</span>
+                @endif
+            </div>
+            <span class="text-xs text-gray-600 flex-shrink-0 ml-4">{{ $chapter->published_at ? $chapter->published_at->diffForHumans() : '' }}</span>
+        </a>
             @empty
             <div class="p-8 text-center text-gray-500">
                 <p>Belum ada chapter tersedia.</p>
@@ -178,7 +178,7 @@
         <h2 class="text-xl font-extrabold mb-6 flex items-center gap-2">
             <span>Komik <span class="gradient-text">Serupa</span></span>
         </h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="comic-grid stagger-grid">
             @foreach($relatedComics as $comic)
                 @include('partials.comic.card', ['comic' => $comic])
             @endforeach

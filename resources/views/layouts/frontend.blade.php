@@ -16,72 +16,14 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81' },
-                        dark: { 50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',500:'#64748b',600:'#475569',700:'#334155',800:'#1e293b',900:'#0f172a',950:'#020617' },
-                        accent: { DEFAULT:'#f59e0b', light:'#fbbf24', dark:'#d97706' },
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Custom Styles -->
-    <style>
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
-
-        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-
-        .comic-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .comic-card:hover { transform: translateY(-6px); }
-        .comic-card:hover .comic-cover { transform: scale(1.08); }
-        .comic-cover { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(99, 102, 241, 0.15); }
-
-        .gradient-text { background: linear-gradient(135deg, #818cf8, #6366f1, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-        .shine { position: relative; overflow: hidden; }
-        .shine::after { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:linear-gradient(to right, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%); transform: rotate(30deg); animation: shine 4s infinite; }
-        @keyframes shine { 0%{left:-100%} 100%{left:100%} }
-
-        .badge-new { animation: badge-pulse 2s infinite; }
-        @keyframes badge-pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
-
-        .search-overlay { transition: all 0.3s ease; }
-
-        @media (max-width: 640px) {
-            .mobile-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 12px; padding-bottom: 8px; }
-            .mobile-scroll::-webkit-scrollbar { display: none; }
-            .mobile-scroll > * { scroll-snap-align: start; flex: 0 0 140px; }
-        }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
-<body class="bg-dark-950 text-gray-100 font-sans antialiased min-h-screen">
+<body class="theme-front bg-background text-foreground font-sans antialiased min-h-screen">
 
     @include('partials.header')
 
-    <main class="min-h-screen">
+    <main class="min-h-screen relative z-10 animate-page-enter">
         @yield('content')
     </main>
 

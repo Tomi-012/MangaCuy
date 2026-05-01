@@ -10,7 +10,7 @@
     <!-- Reader Header -->
     <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-dark-800/50 transition-transform duration-300"
             :class="{'-translate-y-full': !showHeader}">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="page-container py-3 flex items-center justify-between">
             <div class="flex items-center gap-3 min-w-0">
                 <a href="{{ route('comic.show', $comic->slug) }}" class="p-2 hover:bg-dark-800 rounded-lg transition flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
@@ -24,7 +24,7 @@
             <div class="flex items-center gap-2">
                 <!-- Chapter Select -->
                 <select onchange="window.location.href=this.value"
-                        class="bg-dark-800 border border-dark-700 text-sm rounded-lg px-3 py-2 focus:border-primary-500 focus:outline-none max-w-[180px]">
+                        class="select bg-white/5 text-sm max-w-[180px]">
                     @foreach($allChapters as $ch)
                     <option value="{{ route('chapter.read', [$comic->slug, $ch->slug]) }}" {{ $ch->id == $chapter->id ? 'selected' : '' }}>
                         Ch. {{ (int)$ch->chapter_number }} {{ $ch->title ? '- '.Str::limit($ch->title, 20) : '' }}
@@ -33,7 +33,7 @@
                 </select>
 
                 <!-- Settings -->
-                <button @click="showSettings = !showSettings" class="p-2.5 bg-dark-800 hover:bg-dark-700 rounded-lg transition">
+                <button @click="showSettings = !showSettings" class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </button>
             </div>
@@ -93,7 +93,7 @@
             <div class="flex items-center justify-between py-6 border-t border-dark-800">
                 @if($prevChapter)
                 <a href="{{ route('chapter.read', [$comic->slug, $prevChapter->slug]) }}"
-                   class="flex items-center gap-2 px-5 py-3 bg-dark-800 hover:bg-dark-700 rounded-xl transition font-bold text-sm">
+                   class="btn btn-base btn-outline bg-white/5 text-white">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Ch. {{ (int)$prevChapter->chapter_number }}
                 </a>
@@ -102,14 +102,14 @@
                 @endif
 
                 <a href="{{ route('comic.show', $comic->slug) }}"
-                   class="flex items-center gap-2 px-5 py-3 bg-primary-600 hover:bg-primary-700 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-primary-600/30">
+                   class="btn btn-base btn-primary">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
                     Daftar Chapter
                 </a>
 
                 @if($nextChapter)
                 <a href="{{ route('chapter.read', [$comic->slug, $nextChapter->slug]) }}"
-                   class="flex items-center gap-2 px-5 py-3 bg-primary-600 hover:bg-primary-700 rounded-xl transition font-bold text-sm hover:shadow-lg hover:shadow-primary-600/30">
+                   class="btn btn-base btn-primary">
                     Ch. {{ (int)$nextChapter->chapter_number }}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </a>
@@ -124,7 +124,7 @@
     <div class="fixed bottom-0 left-0 right-0 glass border-t border-dark-800/50 p-3 md:hidden z-50">
         <div class="flex items-center justify-between">
             @if($prevChapter)
-            <a href="{{ route('chapter.read', [$comic->slug, $prevChapter->slug]) }}" class="px-4 py-2.5 bg-dark-800 hover:bg-dark-700 rounded-lg transition text-sm font-bold flex items-center gap-1">
+            <a href="{{ route('chapter.read', [$comic->slug, $prevChapter->slug]) }}" class="btn btn-sm btn-outline bg-white/5 text-white flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Prev
             </a>
             @else
@@ -136,7 +136,7 @@
             <span class="text-xs text-gray-500 font-medium">Ch. {{ (int)$chapter->chapter_number }}</span>
 
             @if($nextChapter)
-            <a href="{{ route('chapter.read', [$comic->slug, $nextChapter->slug]) }}" class="px-4 py-2.5 bg-primary-600 hover:bg-primary-700 rounded-lg transition text-sm font-bold flex items-center gap-1">
+            <a href="{{ route('chapter.read', [$comic->slug, $nextChapter->slug]) }}" class="btn btn-sm btn-primary flex items-center gap-1">
                 Next <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
             @else

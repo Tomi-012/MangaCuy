@@ -3,16 +3,16 @@
 @section('title', 'Bookmark Saya - ' . config('app.name'))
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl md:text-3xl font-extrabold mb-8 flex items-center gap-3">
-        <span class="w-10 h-10 bg-red-500/20 text-red-500 rounded-xl flex items-center justify-center">
+<div class="page-container page-section">
+    <h1 class="section-title mb-8 flex items-center gap-3">
+        <span class="w-10 h-10 bg-rose-500/20 text-rose-400 rounded-xl flex items-center justify-center">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
         </span>
         Bookmark Saya
     </h1>
 
     @if($bookmarks->count() > 0)
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-5">
+    <div class="comic-grid stagger-grid">
         @foreach($bookmarks as $bookmark)
             @include('partials.comic.card', ['comic' => $bookmark->comic])
         @endforeach
@@ -28,7 +28,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-400">Belum ada bookmark</h3>
         <p class="text-sm text-gray-600 mt-2">Tambahkan komik favorit kamu ke bookmark!</p>
-        <a href="{{ route('comics.index') }}" class="inline-block mt-6 px-6 py-3 bg-primary-600 hover:bg-primary-700 rounded-xl font-bold text-sm transition">Jelajahi Komik</a>
+        <a href="{{ route('comics.index') }}" class="inline-block mt-6 btn btn-lg btn-primary">Jelajahi Komik</a>
     </div>
     @endif
 </div>

@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer class="bg-dark-900 border-t border-dark-800 mt-16">
-    <div class="container mx-auto px-4 py-12">
+    <div class="page-container py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand -->
             <div class="md:col-span-1">
